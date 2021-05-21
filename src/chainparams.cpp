@@ -59,19 +59,18 @@ static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits
 /**
  * Main network
  */
+ //consensus.BIP16Height = 218579; // 87afb798a3ad9378fcd56123c81fb31cfd9a8df4719b9774d71730c16315a092 - October 1, 2012
+ //consensus.BIP34Height = 710000;
+ //consensus.BIP65Height = 918684; // bab3041e8977e0dc3eeff63fe707b92bde1dd449d8efafb248c27c8264cc311a
+ //consensus.BIP66Height = 811879; // 7aceee012833fa8952f8835d8b1b3ae233cd6ab08fdb27a771d2bd7bdc491894
 class CMainParams : public CChainParams {
 public:
     CMainParams() {
         strNetworkID = "main";
-        consensus.nSubsidyHalvingInterval = 840000;
-        //consensus.BIP16Height = 218579; // 87afb798a3ad9378fcd56123c81fb31cfd9a8df4719b9774d71730c16315a092 - October 1, 2012
-        //consensus.BIP34Height = 710000;
-        
+        consensus.nSubsidyHalvingInterval = 840000
         consensus.BIP16Height = 0; // 87afb798a3ad9378fcd56123c81fb31cfd9a8df4719b9774d71730c16315a092 - October 1, 2012
         consensus.BIP34Height = 0;
         consensus.BIP34Hash = uint256S("fa09d204a83a768ed5a7c8d441fa62f2043abf420cff1226c7b4329aeb9d51cf");
-        //consensus.BIP65Height = 918684; // bab3041e8977e0dc3eeff63fe707b92bde1dd449d8efafb248c27c8264cc311a
-        //consensus.BIP66Height = 811879; // 7aceee012833fa8952f8835d8b1b3ae233cd6ab08fdb27a771d2bd7bdc491894
         consensus.BIP65Height = 0; // bab3041e8977e0dc3eeff63fe707b92bde1dd449d8efafb248c27c8264cc311a
         consensus.BIP66Height = 0; // 7aceee012833fa8952f8835d8b1b3ae233cd6ab08fdb27a771d2bd7bdc491894
         consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"); 
@@ -180,19 +179,17 @@ public:
 
 /**
  * Testnet (v3)
- */
+ */ // consensus.BIP65Height = 76; // 8075c771ed8b495ffd943980a95f702ab34fce3c8c54e379548bda33cc8c0573
+     // consensus.BIP66Height = 76; // 8075c771ed8b495ffd943980a95f702ab34fce3c8c54e379548bda33cc8c0573
+
 class CTestNetParams : public CChainParams {
 public:
     CTestNetParams() {
         strNetworkID = "test";
         consensus.nSubsidyHalvingInterval = 840000;
         consensus.BIP16Height = 0; // always enforce P2SH BIP16 on testnet
-       // consensus.BIP34Height = 76;
-       // consensus.BIP34Hash = uint256S("8075c771ed8b495ffd943980a95f702ab34fce3c8c54e379548bda33cc8c0573");
-       // consensus.BIP65Height = 76; // 8075c771ed8b495ffd943980a95f702ab34fce3c8c54e379548bda33cc8c0573
-       // consensus.BIP66Height = 76; // 8075c771ed8b495ffd943980a95f702ab34fce3c8c54e379548bda33cc8c0573
-          consensus.BIP34Height = 0;
-         consensus.BIP34Hash = uint256S();
+        consensus.BIP34Height = 0;
+        consensus.BIP34Hash = uint256S("8075c771ed8b495ffd943980a95f702ab34fce3c8c54e379548bda33cc8c0573");
         consensus.BIP65Height = 0; // 8075c771ed8b495ffd943980a95f702ab34fce3c8c54e379548bda33cc8c0573
         consensus.BIP66Height = 0; // 8075c771ed8b495ffd943980a95f702ab34fce3c8c54e379548bda33cc8c0573
         consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
@@ -280,18 +277,18 @@ public:
 /**
  * Regression test
  */
+//  consensus.BIP34Height = 500; // BIP34 activated on regtest (Used in functional tests)
+      //  consensus.BIP34Hash = uint256();
+      //  consensus.BIP65Height = 1351; // BIP65 activated on regtest (Used in functional tests)
+      //  consensus.BIP66Height = 1251; // BIP66 activated on regtest (Used in functional tests)
+        
 class CRegTestParams : public CChainParams {
 public:
     explicit CRegTestParams(const ArgsManager& args) {
         strNetworkID = "regtest";
         consensus.nSubsidyHalvingInterval = 150;
         consensus.BIP16Height = 0;
-      //  consensus.BIP34Height = 500; // BIP34 activated on regtest (Used in functional tests)
-      //  consensus.BIP34Hash = uint256();
-      //  consensus.BIP65Height = 1351; // BIP65 activated on regtest (Used in functional tests)
-      //  consensus.BIP66Height = 1251; // BIP66 activated on regtest (Used in functional tests)
-        
-            consensus.BIP34Height = 0; // BIP34 activated on regtest (Used in functional tests)
+        consensus.BIP34Height = 0; // BIP34 activated on regtest (Used in functional tests)
         consensus.BIP34Hash = uint256();
         consensus.BIP65Height = 0; // BIP65 activated on regtest (Used in functional tests)
         consensus.BIP66Height = 0; // BIP66 activated on regtest (Used in functional tests)
