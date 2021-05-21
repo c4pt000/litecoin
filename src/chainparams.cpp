@@ -218,7 +218,6 @@ public:
 
  //breaks compile time       // By default assume that the signatures in ancestors of this block are valid.
  consensus.defaultAssumeValid = uint256S("0xf19dfbdc0e6c399ef45d315d89fc3e972dd8da74503252bacaf664f64d86e6f6"); //1174621
-     consensus.defaultAssumeValid = uint256S(); //1174621
 
         pchMessageStart[0] = 0xfd;
         pchMessageStart[1] = 0xd2;
