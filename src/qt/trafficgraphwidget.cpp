@@ -2,7 +2,7 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-// #include <QPainterPath>   added for boost 1.75 fedora 34 support with qt5 to build in host
+// #include <QPainterPath>   added for boost 1.75 fedora 34 support with qt5 to build in host "repatched for 0.18 checkout branch"
 
 
 
