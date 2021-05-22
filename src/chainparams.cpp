@@ -122,6 +122,30 @@ public:
         m_assumed_chain_state_size = 3;
         genesis = CreateGenesisBlock(1317972665, 2084524493, 0x1e0ffff0, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
+        
+        
+        
+        
+        arith_uint256 best = arith_uint256();
+int n=0;
+arith_uint256 hashTarget = arith_uint256().SetCompact(genesis.nBits);
+while (UintToArith256(genesis.GetHash()) > hashTarget) {
+  arith_uint256 c=UintToArith256(genesis.GetHash());
+                 
+  if(c < best || n==0)
+    {
+      best = c;
+      n=1;
+      printf("%s %s %s\n",genesis.GetHash().GetHex().c_str(),hashTarget.GetHex().c_str(),
+         best.GetHex().c_str());
+    }
+  
+  ++genesis.nNonce;
+  if (genesis.nNonce == 0) { ++genesis.nTime; }
+}
+printf("%s\n",genesis.ToString().c_str());
+        
+        
     //    assert(consensus.hashGenesisBlock == uint256S("0x12a765e31ffd4059bada1e25190f6e98c99d9714d334efa41a195a7e7e04bfe2"));
     //    assert(genesis.hashMerkleRoot == uint256S("0x97ddfbbae6be97fd6cdf3e7ca13232a3afff2353e29badfab7f73011edd4ced9"));
 
