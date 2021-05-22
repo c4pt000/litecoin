@@ -124,13 +124,13 @@ public:
         consensus.hashGenesisBlock = genesis.GetHash();
         
         
-        
+        /*
         
         arith_uint256 best = arith_uint256();
 int n=0;
-arith_uint256 hashTarget = arith_uint256().SetCompact(genesis.nBits);
+arith_uint256 hashTarget = uint256S().SetCompact(genesis.nBits);
 while (UintToArith256(genesis.GetHash()) > hashTarget) {
-  arith_uint256 c=UintToArith256(genesis.GetHash());
+  arith_uint256S c=UintToArith256(genesis.GetHash());
                  
   if(c < best || n==0)
     {
@@ -143,6 +143,8 @@ while (UintToArith256(genesis.GetHash()) > hashTarget) {
   ++genesis.nNonce;
   if (genesis.nNonce == 0) { ++genesis.nTime; }
 }
+
+*/
 printf("%s\n",genesis.ToString().c_str());
         
         
