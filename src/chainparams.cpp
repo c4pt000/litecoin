@@ -151,20 +151,13 @@ public:
                 }
       }
 
-            printf(" Mainnet ---\n");
-            std::cout << std::string(" main_nonce: ") << std::endl;
-            std::cout << ("%" PRIu32, genesis.nNonce) << std::endl;
-            printf("\n");
-            std::cout << std::string(" main_time: ") << std::endl;
-            std::cout << ("%" PRIu32, genesis.nTime) << std::endl;
-            printf("\n");
-            std::cout << std::string(" main_hash: ") << std::endl;
-            std::cout << ("%" PRIu32, genesis.GetHash().ToString().c_str()) << std::endl;
-            printf("\n");
-            std::cout << std::string(" main_merklehash: ") << std::endl;
-            std::cout << ("%" PRIu32, genesis.hashMerkleRoot.ToString().c_str()) << std::endl;
-            printf("\n");
+           printf(" Mainnet ---\n");
+            std::cout << std::string(" main_nonce: ") << ("%" PRIu32, genesis.nNonce) << std::endl;
+            std::cout << std::string(" main_time: ") << ("%" PRIu32, genesis.nTime) << std::endl;
+            std::cout << std::string(" main_hash: ") << ("%" PRIu32, genesis.GetHash().ToString().c_str()) << std::endl;
+            std::cout << std::string(" main_merklehash: ") << ("%" PRIu32, genesis.hashMerkleRoot.ToString().c_str()) << std::endl;
             std::cout << std::string("Finished calculating Mainnet Genesis Block for SED replacement of current assertion and values:") << std::endl;
+
        
 
         }
@@ -320,20 +313,16 @@ consensus.defaultAssumeValid = uint256(); //1174621
 
                 }
             }
-            printf(" Testnet ---\n");
-            std::cout << std::string(" test_nonce: ") << std::endl;
-            std::cout << ("%" PRIu32, genesis.nNonce) << std::endl;
-            printf("\n");
-            std::cout << std::string(" test_time: ") << std::endl;
-            std::cout << ("%" PRIu32, genesis.nTime) << std::endl;
-            printf("\n");
-            std::cout << std::string(" test_hash: ") << std::endl;
-            std::cout << ("%" PRIu32, genesis.GetHash().ToString().c_str()) << std::endl;
-            printf("\n");
-            std::cout << std::string(" test_merklehash: ") << std::endl;
-            std::cout << ("%" PRIu32, genesis.hashMerkleRoot.ToString().c_str()) << std::endl;
-            printf("\n");
+
+             printf(" Testnet ---\n");
+            std::cout << std::string(" test_nonce: ") << ("%" PRIu32, genesis.nNonce) << std::endl;
+            std::cout << std::string(" test_time: ") << ("%" PRIu32, genesis.nTime) << std::endl;
+            std::cout << std::string(" test_hash: ") << ("%" PRIu32, genesis.GetHash().ToString().c_str()) << std::endl;
+            std::cout << std::string(" test_merklehash: ") << ("%" PRIu32, genesis.hashMerkleRoot.ToString().c_str()) << std::endl;
             std::cout << std::string("Finished calculating Testnet Genesis Block for SED replacement of current assertion and values:") << std::endl;
+
+            
+          
   
            
 
@@ -463,20 +452,13 @@ public:
         }
             
             
-            printf(" Regnet ---\n");
-            std::cout << std::string(" reg_nonce: ") << std::endl;
-            std::cout << ("%" PRIu32, genesis.nNonce) << std::endl;
-            printf("\n");
-            std::cout << std::string(" reg_time: ") << std::endl;
-            std::cout << ("%" PRIu32, genesis.nTime) << std::endl;
-            printf("\n");
-            std::cout << std::string(" reg_hash: ") << std::endl;
-            std::cout << ("%" PRIu32, genesis.GetHash().ToString().c_str()) << std::endl;
-            printf("\n");
-            std::cout << std::string(" reg_merklehash: ") << std::endl;
-            std::cout << ("%" PRIu32, genesis.hashMerkleRoot.ToString().c_str()) << std::endl;
-            printf("\n");
-            std::cout << std::string("Finished calculating Regnet Genesis Block for SED replacement of current assertion and values:\n") << std::endl;
+           printf(" Regnet ---\n");
+            std::cout << std::string(" reg_nonce: ") << ("%" PRIu32, genesis.nNonce) << std::endl;
+            std::cout << std::string(" reg_time: ") << ("%" PRIu32, genesis.nTime) << std::endl;
+            std::cout << std::string(" reg_hash: ") << ("%" PRIu32, genesis.GetHash().ToString().c_str()) << std::endl;
+            std::cout << std::string(" reg_merklehash: ") << ("%" PRIu32, genesis.hashMerkleRoot.ToString().c_str()) << std::endl;
+            std::cout << std::string("Finished calculating Regnet Genesis Block for SED replacement of current assertion and values:") << std::endl;
+
   
           
 
