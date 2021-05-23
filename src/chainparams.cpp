@@ -145,12 +145,12 @@ public:
                     std::cout << std::string("NONCE WRAPPED, incrementing time:\n");
                     ++genesis.nTime;
                 }
-                if (genesis.nNonce % 1000 == 0) {
                     if (genesis.nNonce % 1000 == 0) {
                     std::cout << strNetworkID << " nonce: " << genesis.nNonce << " time: " << genesis.nTime << " hash: " << genesis.GetHash().ToString().c_str() << std::endl;
 
                 }
-            }
+      }
+
             printf(" Mainnet ---\n");
             std::cout << std::string(" main_nonce: ") << std::endl;
             std::cout << ("%" PRIu32, genesis.nNonce) << std::endl;
@@ -315,7 +315,6 @@ consensus.defaultAssumeValid = uint256(); //1174621
                     std::cout << std::string("NONCE WRAPPED, incrementing time:\n");
                     ++genesis.nTime;
                 }
-                if (genesis.nNonce % 1000 == 0) {
                     if (genesis.nNonce % 1000 == 0) {
                     std::cout << strNetworkID << " nonce: " << genesis.nNonce << " time: " << genesis.nTime << " hash: " << genesis.GetHash().ToString().c_str() << std::endl;
 
@@ -456,12 +455,13 @@ public:
                     std::cout << std::string("NONCE WRAPPED, incrementing time:\n");
                     ++genesis.nTime;
                 }
-                if (genesis.nNonce % 1000 == 0) {
                     if (genesis.nNonce % 1000 == 0) {
                     std::cout << strNetworkID << " nonce: " << genesis.nNonce << " time: " << genesis.nTime << " hash: " << genesis.GetHash().ToString().c_str() << std::endl;
 
                 }
-            }
+        }
+            
+            
             printf(" Regnet ---\n");
             std::cout << std::string(" reg_nonce: ") << std::endl;
             std::cout << ("%" PRIu32, genesis.nNonce) << std::endl;
@@ -480,6 +480,7 @@ public:
           
 
         }
+        
         consensus.hashGenesisBlock = genesis.GetHash();
     
         
