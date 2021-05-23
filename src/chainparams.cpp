@@ -153,6 +153,12 @@ public:
             std::cout << "   hash: " << genesis.GetHash().ToString().c_str() << "\n";
             std::cout << "   merklehash: "  << genesis.hashMerkleRoot.ToString().c_str() << "\n";
             std::cout << std::string("Finished calculating Mainnet Genesis Block:\n");
+            
+            printf("Mainnet ---\n";
+            printf("  nonce: " , genesis.nNonce().ToString().c_str());
+            printf("   time: " , genesis.nTime().ToString().c_str()); 
+            printf("   merklehash: " , genesis.hashMerkleRoot().ToString().c_str());
+
         }
 
         consensus.hashGenesisBlock = genesis.GetHash();
@@ -311,6 +317,12 @@ consensus.defaultAssumeValid = uint256(); //1174621
             std::cout << "   hash: " << genesis.GetHash().ToString().c_str() << "\n";
             std::cout << "   merklehash: "  << genesis.hashMerkleRoot.ToString().c_str() << "\n";
             std::cout << std::string("Finished calculating Testnet Genesis Block:\n");
+            
+             printf("Testnet ---\n";
+            printf("  nonce: " , genesis.nNonce().ToString().c_str());
+            printf("   time: " , genesis.nTime().ToString().c_str()); 
+            printf("   merklehash: " , genesis.hashMerkleRoot().ToString().c_str());
+
         }
         
         consensus.hashGenesisBlock = genesis.GetHash();
@@ -439,6 +451,12 @@ public:
             std::cout << "   hash: " << genesis.GetHash().ToString().c_str() << "\n";
             std::cout << "   merklehash: "  << genesis.hashMerkleRoot.ToString().c_str() << "\n";
             std::cout << std::string("Finished calculating Testnet Genesis Block:\n");
+            
+             printf("RegTestnet ---\n";
+            printf("  nonce: " , genesis.nNonce().ToString().c_str());
+            printf("   time: " , genesis.nTime().ToString().c_str()); 
+            printf("   merklehash: " , genesis.hashMerkleRoot().ToString().c_str());
+
         }
         consensus.hashGenesisBlock = genesis.GetHash();
     
