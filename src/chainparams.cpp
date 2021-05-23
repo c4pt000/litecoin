@@ -131,10 +131,10 @@ public:
                 }
             }
             std::cout << "Mainnet ---\n";
-            std::cout << "  nonce: " << genesis.nNonce <<  "\n";
-            std::cout << "   time: " << genesis.nTime << "\n";
-            std::cout << "   hash: " << genesis.GetHash().ToString().c_str() << "\n";
-            std::cout << "   merklehash: "  << genesis.hashMerkleRoot.ToString().c_str() << "\n";
+            std::cout << "  main_nonce: " << genesis.nNonce <<  "\n";
+            std::cout << "   main_time: " << genesis.nTime << "\n";
+            std::cout << "   main_hash: " << genesis.GetHash().ToString().c_str() << "\n";
+            std::cout << "   main_merklehash: "  << genesis.hashMerkleRoot.ToString().c_str() << "\n";
             std::cout << std::string("Finished calculating Mainnet Genesis Block:\n");
         }
 
@@ -270,10 +270,10 @@ public:
                 }
             }
             std::cout << "Testnet ---\n";
-            std::cout << "  nonce: " << genesis.nNonce <<  "\n";
-            std::cout << "   time: " << genesis.nTime << "\n";
-            std::cout << "   hash: " << genesis.GetHash().ToString().c_str() << "\n";
-            std::cout << "   merklehash: "  << genesis.hashMerkleRoot.ToString().c_str() << "\n";
+            std::cout << "  test_nonce: " << genesis.nNonce <<  "\n";
+            std::cout << "   test_time: " << genesis.nTime << "\n";
+            std::cout << "   test_hash: " << genesis.GetHash().ToString().c_str() << "\n";
+            std::cout << "   test_merklehash: "  << genesis.hashMerkleRoot.ToString().c_str() << "\n";
             std::cout << std::string("Finished calculating Testnet Genesis Block:\n");
         }
         
@@ -387,10 +387,10 @@ public:
                 }
             }
             std::cout << "RegTestnet ---\n";
-            std::cout << "  nonce: " << genesis.nNonce <<  "\n";
-            std::cout << "   time: " << genesis.nTime << "\n";
-            std::cout << "   hash: " << genesis.GetHash().ToString().c_str() << "\n";
-            std::cout << "   merklehash: "  << genesis.hashMerkleRoot.ToString().c_str() << "\n";
+            std::cout << "  reg_nonce: " << genesis.nNonce <<  "\n";
+            std::cout << "   reg_time: " << genesis.nTime << "\n";
+            std::cout << "   reg_hash: " << genesis.GetHash().ToString().c_str() << "\n";
+            std::cout << "   reg_merklehash: "  << genesis.hashMerkleRoot.ToString().c_str() << "\n";
             std::cout << std::string("Finished calculating RegTestnet Genesis Block:\n");
         }
         
