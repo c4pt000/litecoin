@@ -144,17 +144,26 @@ public:
                     ++genesis.nTime;
                 }
                 if (genesis.nNonce % 1000 == 0) {
-                    std::cout << strNetworkID << " nonce: " << genesis.nNonce << " time: " << genesis.nTime << " hash: " << genesis.GetHash().ToString().c_str() << "\n";
+                    if (genesis.nNonce % 1000 == 0) {
+                    std::cout << strNetworkID << " nonce: " << genesis.nNonce << " time: " << genesis.nTime << " hash: " << genesis.GetHash().ToString().c_str() << std::endl;
+
                 }
             }
-            std::cout << "Mainnet ---\n";
-            std::cout << "  main_nonce: " << genesis.nNonce <<  "\n";
-            std::cout << "   main_time: " << genesis.nTime << "\n";
-            std::cout << "   main_hash: " << genesis.GetHash().ToString().c_str() << "\n";
-            std::cout << "   main_merklehash: "  << genesis.hashMerkleRoot.ToString().c_str() << "\n";
-            std::cout << std::string("Finished calculating Mainnet Genesis Block:\n");
-            
-           
+            printf(" Mainnet ---\n");
+            std::cout << std::string(" main_nonce: ") << std::endl;
+            std::cout << ("%" PRIu32, genesis.nNonce) << std::endl;
+            printf("\n");
+            std::cout << std::string(" main_time: ") << std::endl;
+            std::cout << ("%" PRIu32, genesis.nTime) << std::endl;
+            printf("\n");
+            std::cout << std::string(" main_hash: ") << std::endl;
+            std::cout << ("%" PRIu32, genesis.GetHash().ToString().c_str()) << std::endl;
+            printf("\n");
+            std::cout << std::string(" main_merklehash: ") << std::endl;
+            std::cout << ("%" PRIu32, genesis.hashMerkleRoot.ToString().c_str()) << std::endl;
+            printf("\n");
+            std::cout << std::string("Finished calculating Mainnet Genesis Block for SED replacement of current assertion and values:") << std::endl;
+       
 
         }
 
@@ -305,16 +314,26 @@ consensus.defaultAssumeValid = uint256(); //1174621
                     ++genesis.nTime;
                 }
                 if (genesis.nNonce % 1000 == 0) {
-                    std::cout << strNetworkID << " nonce: " << genesis.nNonce << " time: " << genesis.nTime << " hash: " << genesis.GetHash().ToString().c_str() << "\n";
+                    if (genesis.nNonce % 1000 == 0) {
+                    std::cout << strNetworkID << " nonce: " << genesis.nNonce << " time: " << genesis.nTime << " hash: " << genesis.GetHash().ToString().c_str() << std::endl;
+
                 }
             }
-            std::cout << "Testnet ---\n";
-            std::cout << "  test_nonce: " << genesis.nNonce <<  "\n";
-            std::cout << "  test_time: " << genesis.nTime << "\n";
-            std::cout << "  test_hash: " << genesis.GetHash().ToString().c_str() << "\n";
-            std::cout << "  test_merklehash: "  << genesis.hashMerkleRoot.ToString().c_str() << "\n";
-            std::cout << std::string("Finished calculating Testnet Genesis Block:\n");
-            
+            printf(" Testnet ---\n");
+            std::cout << std::string(" test_nonce: ") << std::endl;
+            std::cout << ("%" PRIu32, genesis.nNonce) << std::endl;
+            printf("\n");
+            std::cout << std::string(" test_time: ") << std::endl;
+            std::cout << ("%" PRIu32, genesis.nTime) << std::endl;
+            printf("\n");
+            std::cout << std::string(" test_hash: ") << std::endl;
+            std::cout << ("%" PRIu32, genesis.GetHash().ToString().c_str()) << std::endl;
+            printf("\n");
+            std::cout << std::string(" test_merklehash: ") << std::endl;
+            std::cout << ("%" PRIu32, genesis.hashMerkleRoot.ToString().c_str()) << std::endl;
+            printf("\n");
+            std::cout << std::string("Finished calculating Testnet Genesis Block for SED replacement of current assertion and values:") << std::endl;
+  
            
 
         }
@@ -436,16 +455,26 @@ public:
                     ++genesis.nTime;
                 }
                 if (genesis.nNonce % 1000 == 0) {
-                    std::cout << strNetworkID << " nonce: " << genesis.nNonce << " time: " << genesis.nTime << " hash: " << genesis.GetHash().ToString().c_str() << "\n";
+                    if (genesis.nNonce % 1000 == 0) {
+                    std::cout << strNetworkID << " nonce: " << genesis.nNonce << " time: " << genesis.nTime << " hash: " << genesis.GetHash().ToString().c_str() << std::endl;
+
                 }
             }
-            std::cout << "RegTestnet ---\n";
-            std::cout << "  reg_nonce: " << genesis.nNonce <<  "\n";
-            std::cout << "  reg_time: " << genesis.nTime << "\n";
-            std::cout << "  reg_hash: " << genesis.GetHash().ToString().c_str() << "\n";
-            std::cout << "  reg_merklehash: "  << genesis.hashMerkleRoot.ToString().c_str() << "\n";
-            std::cout << std::string("Finished calculating RegTestnet Genesis Block:\n");
-            
+            printf(" Regnet ---\n");
+            std::cout << std::string(" reg_nonce: ") << std::endl;
+            std::cout << ("%" PRIu32, genesis.nNonce) << std::endl;
+            printf("\n");
+            std::cout << std::string(" reg_time: ") << std::endl;
+            std::cout << ("%" PRIu32, genesis.nTime) << std::endl;
+            printf("\n");
+            std::cout << std::string(" reg_hash: ") << std::endl;
+            std::cout << ("%" PRIu32, genesis.GetHash().ToString().c_str()) << std::endl;
+            printf("\n");
+            std::cout << std::string(" reg_merklehash: ") << std::endl;
+            std::cout << ("%" PRIu32, genesis.hashMerkleRoot.ToString().c_str()) << std::endl;
+            printf("\n");
+            std::cout << std::string("Finished calculating Regnet Genesis Block for SED replacement of current assertion and values:\n") << std::endl;
+  
           
 
         }
