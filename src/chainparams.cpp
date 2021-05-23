@@ -77,7 +77,7 @@ public:
         consensus.nSubsidyHalvingInterval = 840000;
         consensus.BIP16Height = 0; // 87afb798a3ad9378fcd56123c81fb31cfd9a8df4719b9774d71730c16315a092 - October 1, 2012
         consensus.BIP34Height = 0;
-        consensus.BIP34Hash = uint256S();
+        consensus.BIP34Hash = uint256S("");
         consensus.BIP65Height = 0; // bab3041e8977e0dc3eeff63fe707b92bde1dd449d8efafb248c27c8264cc311a
         consensus.BIP66Height = 0; // 7aceee012833fa8952f8835d8b1b3ae233cd6ab08fdb27a771d2bd7bdc491894
         consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"); 
@@ -113,7 +113,7 @@ public:
 
         // By default assume that the signatures in ancestors of this block are valid.
   //      consensus.defaultAssumeValid = uint256S("0xb34a457c601ef8ce3294116e3296078797be7ded1b0d12515395db9ab5e93ab8"); //1683528
-      consensus.defaultAssumeValid = uint256S(); //1683528
+      consensus.defaultAssumeValid = uint256S(""); //1683528
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -229,7 +229,7 @@ public:
         consensus.nSubsidyHalvingInterval = 840000;
         consensus.BIP16Height = 0; // always enforce P2SH BIP16 on testnet
         consensus.BIP34Height = 0;
-        consensus.BIP34Hash = uint256S();
+        consensus.BIP34Hash = uint256S("");
         consensus.BIP65Height = 0; // 8075c771ed8b495ffd943980a95f702ab34fce3c8c54e379548bda33cc8c0573
         consensus.BIP66Height = 0; // 8075c771ed8b495ffd943980a95f702ab34fce3c8c54e379548bda33cc8c0573
         consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
@@ -269,7 +269,9 @@ public:
 
 
  //breaks compile time       // By default assume that the signatures in ancestors of this block are valid.
- consensus.defaultAssumeValid = uint256S("0xf19dfbdc0e6c399ef45d315d89fc3e972dd8da74503252bacaf664f64d86e6f6"); //1174621
+ //consensus.defaultAssumeValid = uint256S("0xf19dfbdc0e6c399ef45d315d89fc3e972dd8da74503252bacaf664f64d86e6f6"); //1174621
+consensus.defaultAssumeValid = uint256S(""); //1174621
+
 
         pchMessageStart[0] = 0xfd;
         pchMessageStart[1] = 0xd2;
@@ -343,7 +345,7 @@ public:
         consensus.nSubsidyHalvingInterval = 150;
         consensus.BIP16Height = 0;
         consensus.BIP34Height = 0; // BIP34 activated on regtest (Used in functional tests)
-        consensus.BIP34Hash = uint256();
+        consensus.BIP34Hash = uint256("");
         consensus.BIP65Height = 0; // BIP65 activated on regtest (Used in functional tests)
         consensus.BIP66Height = 0; // BIP66 activated on regtest (Used in functional tests)
         consensus.powLimit = uint256S("7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
