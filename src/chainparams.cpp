@@ -1,3 +1,5 @@
+
+// check https://github.com/c4pt000/radioCOIN/src/chainparams.cpp for some major differences once genesis hash and genesis merkle roots are built and other blocks are minted
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2018 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
