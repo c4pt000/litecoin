@@ -54,10 +54,14 @@
 #include <typeinfo>
 #include <utility>
 
+/** How long to cache transactions in mapRelay for normal relay */
+static constexpr auto RELAY_TX_CACHE_TIME = 15min;
+/** How long a transaction has to be in the mempool before it can unconditionally be relayed (even when not in mapRelay). */
+static constexpr auto UNCONDITIONAL_RELAY_DELAY = 2min;
 /** Headers download timeout.
  *  Timeout = base + per_header * (expected number of headers) */
 static constexpr auto HEADERS_DOWNLOAD_TIMEOUT_BASE = 15min;
-static constexpr auto HEADERS_DOWNLOAD_TIMEOUT_PER_HEADER = 1ms;
+static constexpr auto HEADERS_DOWNLOAD_TIMEOUT_PER_HEADER = 10ms;
 /** How long to wait for a peer to respond to a getheaders request */
 static constexpr auto HEADERS_RESPONSE_TIME{2min};
 /** Protect at least this many outbound peers from disconnection due to slow/
@@ -101,16 +105,13 @@ static constexpr auto NONPREF_PEER_TX_DELAY{2s};
 /** How long to delay requesting transactions from overloaded peers (see MAX_PEER_TX_REQUEST_IN_FLIGHT). */
 static constexpr auto OVERLOADED_PEER_TX_DELAY{2s};
 /** How long to wait before downloading a transaction from an additional peer */
-static constexpr auto GETDATA_TX_INTERVAL{60s};
+static constexpr auto GETDATA_TX_INTERVAL{5s};
 /** Limit to avoid sending big packets. Not used in processing incoming GETDATA for compatibility */
-static const unsigned int MAX_GETDATA_SZ = 20000;
+static const unsigned int MAX_GETDATA_SZ = 2000;
 /** Number of blocks that can be requested at any given time from a single peer. */
 static const int MAX_BLOCKS_IN_TRANSIT_PER_PEER = 16;
-/** Default time during which a peer must stall block download progress before being disconnected.
- * the actual timeout is increased temporarily if peers are disconnected for hitting the timeout */
-static constexpr auto BLOCK_STALLING_TIMEOUT_DEFAULT{2s};
-/** Maximum timeout for stalling block download. */
-static constexpr auto BLOCK_STALLING_TIMEOUT_MAX{64s};
+/** Time during which a peer must stall block download progress before being disconnected. */
+static constexpr auto BLOCK_STALLING_TIMEOUT_MAX{2s};
 /** Number of headers sent in one getheaders result. We rely on the assumption that if a peer sends
  *  less than this number, we reached its tip. Changing this value is a protocol upgrade. */
 static const unsigned int MAX_HEADERS_RESULTS = 2000;
@@ -119,7 +120,6 @@ static const unsigned int MAX_HEADERS_RESULTS = 2000;
 static const int MAX_CMPCTBLOCK_DEPTH = 5;
 /** Maximum depth of blocks we're willing to respond to GETBLOCKTXN requests for. */
 static const int MAX_BLOCKTXN_DEPTH = 10;
-static_assert(MAX_BLOCKTXN_DEPTH <= MIN_BLOCKS_TO_KEEP, "MAX_BLOCKTXN_DEPTH too high");
 /** Size of the "block download window": how far ahead of our current height do we fetch?
  *  Larger windows tolerate larger download speed differences between peer, but increase the potential
  *  degree of disordering of blocks on disk (which make reindexing and pruning harder). We'll probably
@@ -131,10 +131,10 @@ static constexpr double BLOCK_DOWNLOAD_TIMEOUT_BASE = 1;
 static constexpr double BLOCK_DOWNLOAD_TIMEOUT_PER_PEER = 0.5;
 /** Maximum number of headers to announce when relaying blocks with headers message.*/
 static const unsigned int MAX_BLOCKS_TO_ANNOUNCE = 8;
+/** Maximum number of unconnecting headers announcements before DoS score */
+static const int MAX_UNCONNECTING_HEADERS = 10;
 /** Minimum blocks required to signal NODE_NETWORK_LIMITED */
-static const unsigned int NODE_NETWORK_LIMITED_MIN_BLOCKS = 288;
-/** Window, in blocks, for connecting to NODE_NETWORK_LIMITED peers */
-static const unsigned int NODE_NETWORK_LIMITED_ALLOW_CONN_BLOCKS = 144;
+static const unsigned int NODE_NETWORK_LIMITED_MIN_BLOCKS = 150000;
 /** Average delay between local address broadcasts */
 static constexpr auto AVG_LOCAL_ADDRESS_BROADCAST_INTERVAL{24h};
 /** Average delay between peer address broadcasts */
@@ -151,33 +151,37 @@ static constexpr auto OUTBOUND_INVENTORY_BROADCAST_INTERVAL{2s};
 /** Maximum rate of inventory items to send per second.
  *  Limits the impact of low-fee transaction floods. */
 static constexpr unsigned int INVENTORY_BROADCAST_PER_SECOND = 7;
-/** Target number of tx inventory items to send per transmission. */
-static constexpr unsigned int INVENTORY_BROADCAST_TARGET = INVENTORY_BROADCAST_PER_SECOND * count_seconds(INBOUND_INVENTORY_BROADCAST_INTERVAL);
 /** Maximum number of inventory items to send per transmission. */
-static constexpr unsigned int INVENTORY_BROADCAST_MAX = 1000;
-static_assert(INVENTORY_BROADCAST_MAX >= INVENTORY_BROADCAST_TARGET, "INVENTORY_BROADCAST_MAX too low");
-static_assert(INVENTORY_BROADCAST_MAX <= MAX_PEER_TX_ANNOUNCEMENTS, "INVENTORY_BROADCAST_MAX too high");
+static constexpr unsigned int INVENTORY_BROADCAST_MAX = INVENTORY_BROADCAST_PER_SECOND * count_seconds(INBOUND_INVENTORY_BROADCAST_INTERVAL);
+/** The number of most recently announced transactions a peer can request. */
+static constexpr unsigned int INVENTORY_MAX_RECENT_RELAY = 3500;
+/** Verify that INVENTORY_MAX_RECENT_RELAY is enough to cache everything typically
+ *  relayed before unconditional relay from the mempool kicks in. This is only a
+ *  lower bound, and it should be larger to account for higher inv rate to outbound
+ *  peers, and random variations in the broadcast mechanism. */
+static_assert(INVENTORY_MAX_RECENT_RELAY >= INVENTORY_BROADCAST_PER_SECOND * UNCONDITIONAL_RELAY_DELAY / std::chrono::seconds{1}, "INVENTORY_RELAY_MAX too low");
 /** Average delay between feefilter broadcasts in seconds. */
 static constexpr auto AVG_FEEFILTER_BROADCAST_INTERVAL{10min};
 /** Maximum feefilter broadcast delay after significant change. */
 static constexpr auto MAX_FEEFILTER_CHANGE_DELAY{5min};
 /** Maximum number of compact filters that may be requested with one getcfilters. See BIP 157. */
-static constexpr uint32_t MAX_GETCFILTERS_SIZE = 10000;
+static constexpr uint32_t MAX_GETCFILTERS_SIZE = 1000;
 /** Maximum number of cf hashes that may be requested with one getcfheaders. See BIP 157. */
-static constexpr uint32_t MAX_GETCFHEADERS_SIZE = 20000;
+static constexpr uint32_t MAX_GETCFHEADERS_SIZE = 2000;
 /** the maximum percentage of addresses from our addrman to return in response to a getaddr message. */
 static constexpr size_t MAX_PCT_ADDR_TO_SEND = 23;
 /** The maximum number of address records permitted in an ADDR message. */
 static constexpr size_t MAX_ADDR_TO_SEND{1000};
 /** The maximum rate of address records we're willing to process on average. Can be bypassed using
  *  the NetPermissionFlags::Addr permission. */
-static constexpr double MAX_ADDR_RATE_PER_SECOND{0.1};
+static constexpr double MAX_ADDR_RATE_PER_SECOND{0.2};
 /** The soft limit of the address processing token bucket (the regular MAX_ADDR_RATE_PER_SECOND
  *  based increments won't go above this, but the MAX_ADDR_TO_SEND increment following GETADDR
  *  is exempt from this limit). */
 static constexpr size_t MAX_ADDR_PROCESSING_TOKEN_BUCKET{MAX_ADDR_TO_SEND};
 /** The compactblocks version we support. See BIP 152. */
 static constexpr uint64_t CMPCTBLOCKS_VERSION{2};
+
 
 // Internal stuff
 namespace {
